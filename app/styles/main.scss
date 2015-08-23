@@ -12,6 +12,34 @@ body, html {
 body {
   background-color: green;
   background-position: center;
-  background-image: url('/images/background.jpg');         // a forest
+  background-image: url('/images/background.jpg');
   background-size: cover;
-  /*cursor: url('/images/crosshair.png') 32 32, crosshair;*/
+}
+
+.title {
+  position: absolute;
+  font-size: 3em;
+  top: 10px;
+  left: 30px;
+  color: white;
+}
+
+.score {
+  position: absolute;
+  font-size: 3em;
+  top: 10px;
+  right: 40px;
+  color: white;
+}
+
+#squirrel {
+  position: absolute;
+  top: 310px;
+  right: 30px;
+}
+
+.acorn {
+  position: absolute;
+  background-image: url("/images/acorn.png");
+
+}
