@@ -22,6 +22,7 @@ body {
   top: 10px;
   left: 30px;
   color: white;
+  z-index: 1;
 }
 
 .score {
@@ -40,6 +41,25 @@ body {
 
 .acorn {
   position: absolute;
+  height: 60px;
+  width: 60px;
+  background-repeat: no-repeat;
+  top: 0;
+  z-index: 0.5;
+}
+&.left {
   background-image: url("/images/acorn.png");
+  background-position: right -30px top -70px;
+}
 
+&.right {
+   background-image: url("/images/acorn-right.png");
+  background-position: right -40px bottom -70px;
+}
+
+#basket {
+  position: absolute;
+  bottom: 70px;
+  padding-left: 10px;
+  z-index: 1;
 }
