@@ -39,22 +39,35 @@ body {
   right: 30px;
 }
 
+$transition-speed: 1.0s;
+
 .acorn {
   position: absolute;
   height: 60px;
   width: 60px;
+  max-width: 900px;
+  background-size: fill;
   background-repeat: no-repeat;
   top: 0;
   z-index: 0.5;
-}
-&.left {
-  background-image: url("/images/acorn.png");
-  background-position: right -30px top -70px;
+  transition: bottom $transition-speed, top $transition-speed;
+  transition-timing-function: linear;
+
+  &.left {
+    background-image: url("/images/acorn.png");
+    background-position: right -30px top -70px;
+  }
+
+  &.right {
+    background-image: url("/images/acorn-right.png");
+    background-position: right -40px bottom -70px;
+  }
 }
 
-&.right {
-   background-image: url("/images/acorn-right.png");
-  background-position: right -40px bottom -70px;
+#acornZone {
+  width: 800px;
+  height: 200px;
+  position: relative;
 }
 
 #basket {
