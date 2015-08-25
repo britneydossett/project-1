@@ -22,7 +22,7 @@ body {
   top: 10px;
   left: 30px;
   color: white;
-  z-index: 1;
+  z-index: 2;
 }
 
 .score {
@@ -49,24 +49,27 @@ $transition-speed: 1.0s;
   background-size: fill;
   background-repeat: no-repeat;
   top: 0;
-  z-index: 0.5;
+  z-index: 1;
   transition: bottom $transition-speed, top $transition-speed;
   transition-timing-function: linear;
 
   &.left {
     background-image: url("/images/acorn.png");
-    background-position: right -30px top -70px;
+    /*background-position: right -30px top -70px;*/
   }
 
   &.right {
-    background-image: url("/images/acorn-right.png");
-    background-position: right -40px bottom -70px;
+    background-image: url("/images/acornRight2.png");
+    /*background-position: right -40px bottom -70px;*/
   }
 }
 
 #basket {
   position: absolute;
+  width: 200px;
+  height: 90px;
   bottom: 70px;
   padding-left: 10px;
   z-index: 1;
+  opacity: 1;
 }

@@ -33,7 +33,7 @@ $(document).keydown(function(e){
             left: "+=25"
         });
         break;
-    }
+  }
 });
 
 function updateAcorn(acorn) {
@@ -52,7 +52,6 @@ function updateAcorn(acorn) {
     acorn.fadeOut(ACORN_FADE_TIME, function() {
       acorn.removeClass('fading');
       acorn.removeClass('falling');
-      // TODO: recycle the acorn
       recycle(acorn);
     });
   }
@@ -71,28 +70,6 @@ function recycle(acorn) {
     acorn.removeClass('falling').show().addClass('right');
   }
 }
-// function recycle(acorn) {
-//    if ('.falling')
-// }
-// function updateAcorn(acorn) {
-
-//   if (acorn.offset().bottom < 1100) {
-//     acorn.removeClass("left").addClass("left");
-//   }
-
-//   if (acorn.offset().left < $(document).height() + 200) {
-//     acorn.removeClass("right").addClass("right");
-//   }
-// }
-
-// Timing in msight() + acorn.offset().bottom;
-//   acorn.css("top", newTop);
-// if (acorn.offset().bottom < 1100) {
-//   acorn.fadeOut(ACORN_FADE_TIME, function() {
-//     acorn.removeClass("left right");
-//     recycle(acorn);
-//   });
-// }
 
 function getNonFallingAcorn() {
   var nonFallingAcorns = $('.acorn').not(".falling");
@@ -131,6 +108,8 @@ function fallingAcornManager() {
 
 function step() {
 
+  keepScore();
+
   $('.acorn').each(function (i, acorn) {
     acorn = $(acorn);
     if (fallingAcorn(acorn)) {
@@ -138,12 +117,33 @@ function step() {
       // console.log('acorn: bottom=' + acorn.offset().bottom + ', class=' + acorn.attr('class'));
 
       // TODO: check for a caught acorn (collision detection)
-    }
+}
   });
 }
 
+function collision($basket, $acorn) {
+      var x1 = $basket.offset().left;
+      var y1 = $basket.offset().top;
+      var h1 = $basket.outerHeight(true);
+      var w1 = $basket.outerWidth(true);
+      var b1 = y1 + h1;
+      var r1 = x1 + w1;
+      var x2 = $acorn.offset().left;
+      var y2 = $acorn.offset().top;
+      var h2 = $acorn.outerHeight(true);
+      var w2 = $acorn.outerWidth(true);
+      var b2 = y2 + h2;
+      var r2 = x2 + w2;
+
+      if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return numCaught;
+      return ++numCaught;
+    }
+
 // once page loads, call fallingAcorn function
 $(function() {
+  setInterval(function() {
+    $('keepScore').text(collision($('#basket'), $('.acorn')));
+  }, 100);
   setInterval(step, GAME_SPEED);
   setInterval(fallingAcornManager, ACORN_MANAGER_SPEED);
 });
