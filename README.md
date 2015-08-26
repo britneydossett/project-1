@@ -1,4 +1,22 @@
-# project-1
+#Project 1 Overview
+
+Hungry Squirrel is a game where you help the squirrel gather nuts for the winter.
+
+The object of the game is to move the basket using the left and right arrows to catch the acorns as they fall from the tree. The counter keeps track of how many nuts you catch.
+
+To run locally, clone this repo and run bower install and then grunt serve.
+
+#Technologies Used
+
+HTML5
+SASS
+jQuery
+JavaScript
+Yeoman
+Grunt
+Bower
+
+#Links
 
 [Wireframe](http://imgur.com/vtOqyVb)
 
