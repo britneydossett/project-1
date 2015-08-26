@@ -16,6 +16,10 @@ function fallingAcorn(acorn) {
 
 function keepScore() {
   $('.score').html('Score: ' + numCaught);
+  // if (numCaught === 5) {
+  //   alert("The squirrel has enough nuts to last the whole winter!");
+  //   ;
+  // }
 }
 
 //Basket move left & right
