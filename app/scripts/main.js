@@ -1,15 +1,14 @@
 'use strict';
 
 var numCaught = 0;
-var NUM_ACORNS = 8; // TODO: change back to 8
-var MAX_NUM_FALLING = 3;
+var maxNumFalling = 3;
 
 // Timing in ms
-var MIN_FALLING_RANDOM_DELAY = 750
-var MAX_FALLING_RANDOM_DELAY = 2000
-var GAME_SPEED = 500
-var ACORN_FADE_TIME = 500
-var ACORN_MANAGER_SPEED = 750
+var minDelay = 750;
+var maxDelay = 2000;
+var gameSpeed = 500;
+var acornFadeTime = 500;
+var acornManagerSpeed = 750;
 
 function fallingAcorn(acorn) {
   return acorn.hasClass('falling');
@@ -35,24 +34,6 @@ $(document).keydown(function(e) {
   }
 });
 
-function updateAcorn(acorn) {
-  var newTop = acorn.offset().top + 200;
-  acorn.css('top', newTop);
-
-  // Timing in ms
-  console.log('acorn.offset().top: ' + acorn.offset().top);
-  console.log('document height: ' + $(document).height());
-  if (!acorn.hasClass('fading') && acorn.offset().top > $(document).height() - 200) {
-    console.log('Fading out acorn');
-    acorn.addClass('fading'); //had to add fading class for proper recycling
-    acorn.fadeOut(ACORN_FADE_TIME, function() {
-      acorn.removeClass('fading');
-      acorn.removeClass('falling');
-      recycle(acorn);
-    });
-  }
-}
-
 function recycle(acorn) {
   console.log('recycle acorn: ' + acorn.attr('id'));
   var newLeft = Math.floor(Math.random() * $(document).width() - 300); //randomizes duck position
@@ -64,6 +45,24 @@ function recycle(acorn) {
   }
   else {
     acorn.removeClass('falling').show().addClass('right');
+  }
+}
+
+function updateAcorn(acorn) {
+  var newTop = acorn.offset().top + 200;
+  acorn.css('top', newTop);
+
+  // Timing in ms
+  console.log('acorn.offset().top: ' + acorn.offset().top);
+  console.log('document height: ' + $(document).height());
+  if (!acorn.hasClass('fading') && acorn.offset().top > $(document).height() - 200) {
+    console.log('Fading out acorn');
+    acorn.addClass('fading'); //had to add fading class for proper recycling
+    acorn.fadeOut(acornFadeTime, function() {
+      acorn.removeClass('fading');
+      acorn.removeClass('falling');
+      recycle(acorn);
+    });
   }
 }
 
@@ -80,39 +79,35 @@ function getRandomInteger(min, max) {
   return min + Math.round(Math.random() * (max - min));
 }
 
-var pending_falling_update = false;
+var pendingUpdate = false;
 
 function fallingAcornManager() {
   var numFallingAcorns = $('.falling').length;
   console.log('numFallingAcorns: ' + numFallingAcorns);
 
-  if (numFallingAcorns < MAX_NUM_FALLING && pending_falling_update === false) {
-    pending_falling_update = true;
+  if (numFallingAcorns < maxNumFalling && pendingUpdate === false) {
+    pendingUpdate = true;
 
     var acorn = getNonFallingAcorn();
-    var randomDelay = getRandomInteger(MIN_FALLING_RANDOM_DELAY, MAX_FALLING_RANDOM_DELAY);
+    var randomDelay = getRandomInteger(minDelay, maxDelay);
 
     console.log('randomDelay: ' + randomDelay);
 
     setTimeout(function() {
       console.log('adding falling');
       acorn.addClass('falling');
-      pending_falling_update = false;
+      pendingUpdate = false;
     }, randomDelay);
   }
 }
 
 function step() {
-
   keepScore();
 
   $('.acorn').each(function(i, acorn) {
     acorn = $(acorn);
     if (fallingAcorn(acorn)) {
       updateAcorn(acorn);
-      // console.log('acorn: bottom=' + acorn.offset().bottom + ', class=' + acorn.attr('class'));
-
-      // TODO: check for a caught acorn (collision detection)
     }
   });
 }
@@ -132,47 +127,16 @@ function collision() {
       $('#acorn' + i).removeClass('falling');
       recycle($('#acorn' + i));
       numCaught++;
-      // acorn.removeClass('fading').addClass('falling').fadeOut(100, function() {
-      //     recycle(acorn)});
-      }
-      else {
-        console.log(false);
-      }
     }
+    else {
+      console.log(false);
+    }
+  }
 }
-// function caught(acorn) {
-//   if (collision($acorn) == true) {
-//     numCaught++;
-//     acorn.removeClass('fading').addClass('falling').fadeOut(100, function() {
-//       recycle(acorn);
-//     });
-//   }
-// }
 
 // once page loads, call fallingAcorn function
 $(function() {
-  setInterval(collision, 100)
-  setInterval(step, GAME_SPEED);
-  setInterval(fallingAcornManager, ACORN_MANAGER_SPEED);
+  setInterval(collision, 100);
+  setInterval(step, gameSpeed);
+  setInterval(fallingAcornManager, acornManagerSpeed);
 });
-
-// // function step() {
-
-// // updateScore();
-
-//   $(".acorn").each(function (i, acorn) {
-//     acorn = $(acorn);
-//     if (fallingAcorn(acorn)) {
-//       updateAcorn(acorn);
-//     }
-//     else {
-//       console.log('Acorn falling');
-//     }
-//     console.log('acorn: bottom=' + acorn.offset().bottom + ', class=' + acorn.attr('class'));
-//   });
-// }
-
-// $('.acorn').each(function (i, acorn) {
-//     acorn = $(acorn);
-//     acorn.css('bottom', duck.offset().bottom + 30);
-//   });
