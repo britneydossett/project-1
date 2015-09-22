@@ -10,13 +10,13 @@ To run locally, clone this repo and run bower install and then grunt serve.
 
 #Technologies Used
 
-HTML5,
-SASS,
-jQuery,
-JavaScript,
-Yeoman,
-Grunt,
-Bower
+*HTML5,
+*SASS,
+*jQuery,
+*JavaScript,
+*Yeoman,
+*Grunt,
+*Bower
 
 #Links
 
