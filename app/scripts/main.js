@@ -2,6 +2,8 @@
 
 var numCaught = 0;
 var maxNumFalling = 3;
+var $myModal2 = false;
+var $myModal3 = false;
 
 // Timing in ms
 var minDelay = 750;
@@ -11,15 +13,21 @@ var acornFadeTime = 500;
 var acornManagerSpeed = 750;
 
 function fallingAcorn(acorn) {
-  return acorn.hasClass('falling');
+    return acorn.hasClass('falling');
 }
 
 function keepScore() {
   $('.score').html('Score: ' + numCaught);
-  // if (numCaught === 5) {
-  //   alert("The squirrel has enough nuts to last the whole winter!");
-  //   ;
-  // }
+  if (numCaught === 10 && $myModal2 == false) {
+    $myModal2 = true;
+    $("#myModal2").modal("show");
+  }
+  else if (numCaught === 20 && $myModal3 == false) {
+    $myModal3 = true;
+    $("#myModal3").modal("show");
+  }
+  else {
+  }
 }
 
 //Basket move left & right
@@ -40,7 +48,7 @@ $(document).keydown(function(e) {
 
 function recycle(acorn) {
   console.log('recycle acorn: ' + acorn.attr('id'));
-  var newLeft = Math.floor(Math.random() * $(document).width() - 300); //randomizes duck position
+  var newLeft = Math.floor(Math.random() * $(document).width() - 300); //randomizes acorn position
   acorn.css('left', newLeft);
   acorn.css('top', 0);
 
@@ -53,13 +61,13 @@ function recycle(acorn) {
 }
 
 function updateAcorn(acorn) {
-  var newTop = acorn.offset().top + 200;
+  var newTop = acorn.offset().top + 220;
   acorn.css('top', newTop);
 
   // Timing in ms
   console.log('acorn.offset().top: ' + acorn.offset().top);
   console.log('document height: ' + $(document).height());
-  if (!acorn.hasClass('fading') && acorn.offset().top > $(document).height() - 200) {
+  if (!acorn.hasClass('fading') && acorn.offset().top > $(document).height() - 220) {
     console.log('Fading out acorn');
     acorn.addClass('fading'); //had to add fading class for proper recycling
     acorn.fadeOut(acornFadeTime, function() {
@@ -137,6 +145,8 @@ function collision() {
     }
   }
 }
+
+$('#myModal').modal('show')
 
 // once page loads, call fallingAcorn function
 $(function() {

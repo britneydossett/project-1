@@ -24,6 +24,73 @@
 <body>
   <div class="title">Hungry Squirrel</div>
   <div class="score">Score: </div>
+
+  <!-- Large modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">Welcome to Hungry Squirrel!</h3>
+          </div>
+          <div class="modal-body">
+            Mr. Lazy Squirrel needs help gathering nuts for the winter. Help him by using the left and right arrow keys to collect nuts in the basket.
+            <br><br>
+            Are you ready to help Mr. Lazy Squirrel gather nuts for the winter? 
+          </div>
+          <div class="modal-footer" id="modalFooter">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Let's Play!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">Level 1 Complete!</h3>
+          </div>
+          <div class="modal-body">
+            Whew! Mr. Lazy Squirrel won't starve this winter thanks to you. But we might need a little more to give him enough energy to collect some acorns for himself next year.
+            <br><br>
+            Are you ready for level 2?
+          </div>
+          <div class="modal-footer" id="modalFooter">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Let's Play!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">Level 2 Complete!</h3>
+          </div>
+          <div class="modal-body">
+            Mr. Lazy Squirrel thanks you for helping him survive the winter!! We will see if he is less lazy next year.
+            <br><br>
+            You can keep gathering as many nuts as you want for Mr. Lazy Squirrel though.
+          </div>
+          <div class="modal-footer" id="modalFooter">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Continue Playing!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="squirrel"><img src="/images/squirrel-head.png" width="150px" height="200px"></div>
   <div id="acorn1" class="acorn left" style="left: 100px"></div>
   <div id="acorn2" class="acorn right" style="left: 200px"></div>
@@ -56,6 +123,7 @@
   <!-- endbuild -->
   <!-- build:js scripts/main.js -->
   <script src="scripts/main.js"></script>
+
   <!-- endbuild -->
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>
